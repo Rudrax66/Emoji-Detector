@@ -1,130 +1,69 @@
-# 🏓 PONG — Hand Controlled (Computer Vision)
+😂 Emoji Meme Reactor — Computer Vision
+A real-time meme reaction app built with Python, OpenCV, and MediaPipe. It detects your hand gestures and facial expressions through your webcam and overlays a matching meme on screen!
 
-A real-time hand-controlled Pong game built with Python, OpenCV, MediaPipe, and Pygame. Control the paddles using your hands in front of a webcam — no keyboard or mouse needed!
+📸 How It Works
+The app uses your webcam to:
 
----
+Detect hand gestures via MediaPipe Hands
+Detect facial expressions via MediaPipe FaceMesh
+Overlay a matching meme image in real time
 
-## 📸 How It Works
 
-The game uses your webcam to detect hand positions via **MediaPipe**. Your **index fingertip** controls the paddle height in real time.
+🛠️ Requirements
 
-- **Left hand** → controls **Player 1** (left paddle)
-- **Right hand** → controls **Player 2** (right paddle)
+Python 3.8 – 3.11 (MediaPipe does not fully support 3.12+)
+A working webcam
+Good lighting for best detection
 
----
 
-## 🛠️ Requirements
+📦 Installation
+1. Clone or download the project
+bashgit clone https://github.com/yourusername/emoji-reactor.git
+cd emoji-reactor
+2. Create a virtual environment
+powershellpython -m venv emoji_env
+emoji_env\Scripts\activate
+3. Install dependencies
+powershellpip install -r requirements.txt
 
-- Python **3.8 – 3.11** (MediaPipe does not fully support 3.12+)
-- A working **webcam**
-- Good **lighting** for hand detection
-
----
-
-## 📦 Installation
-
-### 1. Clone or download the project
-
-```bash
-git clone https://github.com/yourusername/pong_cv.git
-cd pong_cv
-```
-
-### 2. Create a virtual environment
-
-```powershell
-python -m venv .venv
-.venv\Scripts\activate
-```
-
-### 3. Install dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
----
-
-## ▶️ Run the Game
-
-```bash
-python pong_cv.py
-```
-
----
-
-## 🎮 Controls
-
-| Action              | Input                        |
-|---------------------|------------------------------|
-| Move P1 paddle      | Raise/lower your **left hand**  |
-| Move P2 paddle      | Raise/lower your **right hand** |
-| Quit game           | Press `Q` or `Esc`           |
-| Restart after win   | Press `R`                    |
-
----
-
-## 📁 Project Structure
-
-```
-pong_cv/
+📁 Project Structure
+Emoji PY/
 │
-├── pong_cv.py          # Main game file (hand-controlled Pong)
-├── pythongame.py       # Bonus: Word guessing game (tkinter)
-├── requirements.txt    # Python dependencies
-└── README.md           # This file
-```
+├── emoji_reactor__1_.py     # Main app file
+├── requirements.txt         # Python dependencies
+├── README.md                # This file
+└── memes/                   # Meme images folder
+    ├── ok.jpeg
+    ├── air.jpg
+    ├── SmiLe copy.jpg
+    ├── PlAiN.jpg
+    ├── punch.png
+    ├── laugh.jpg
+    ├── shock.jpg
+    ├── thumbs.jpg
+    └── peace.jpg
 
----
+⚠️ The memes/ folder must exist and contain all images listed above, otherwise the app will crash.
 
-## 📋 Dependencies
 
-```
-pygame==2.6.1
+▶️ Run the App
+powershellpython emoji_reactor__1_.py
+Press Q to quit.
+
+🎮 Gestures & Reactions
+Gesture / ExpressionMeme Triggered😊 SmileSmiLe copy.jpg😂 Laugh (mouth open wide, eyes squinted)laugh.jpg😮 Shock (mouth + eyes wide open)shock.jpg😐 Plain / Neutral facePlAiN.jpg👌 OK sign (thumb + index close)ok.jpeg🙌 Hands up (all fingers raised)air.jpg🥊 Punch (fingers folded in)punch.png👍 Thumbs upthumbs.jpg✌️ Peace sign (index + middle up)peace.jpg
+
+📋 Dependencies
 opencv-python==4.10.0.84
 mediapipe==0.10.9
-```
+numpy==1.26.4
 
-> `tkinter` is built into Python — no install needed for `pythongame.py`.
+🧠 How Detection Works
+Hand Gestures are detected first (higher priority). If no hand gesture is found, the app falls back to face expression detection.
+Smoothing system — a gesture history queue of 9 frames is used with a 1.2 second cooldown to prevent flickering between memes.
 
----
+🐛 Troubleshooting
+ProblemFixmediapipe has no attribute 'solutions'Run pip install mediapipe==0.10.9 --force-reinstallCould not load memes/ok.jpegMake sure all images are inside a memes/ folderNo module named 'pip'Run python -m ensurepip --upgradeWebcam not openingEnsure no other app is using the webcamHand/face not detectedImprove lighting and keep face/hand clearly visibleMeme not changingHold the gesture steady for ~1.5 seconds
 
-## 🧠 Game Rules
-
-- First player to score **4 points** wins
-- The ball speeds up slightly with each paddle hit (max speed capped)
-- The angle of the ball changes based on where it hits the paddle
-- If no hand is detected, the paddle stays in its last position
-
----
-
-## 🐛 Troubleshooting
-
-| Problem | Fix |
-|---|---|
-| `No module named 'pip'` | Run `python -m ensurepip --upgrade` |
-| `mediapipe has no attribute 'solutions'` | Run `pip install mediapipe==0.10.9` |
-| Webcam not detected | Check webcam is connected and not used by another app |
-| Hand not detected | Improve lighting; keep hand fully visible in frame |
-| Black screen | Ensure your webcam drivers are up to date |
-
----
-
-## 🪀 Bonus Game — Word Guesser
-
-A simple tkinter-based word guessing game is also included.
-
-```bash
-python pythongame.py
-```
-
-- A random word is displayed as blanks (`_ _ _ _`)
-- Type one letter at a time and click **Guess**
-- You have **5 lives** — wrong guesses reduce lives
-- Guess the full word before running out!
-
----
-
-## 📄 License
-
+📄 License
 This project is open source and free to use for educational purposes.
